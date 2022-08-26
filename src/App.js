@@ -1,24 +1,38 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import {Layout} from 'antd' 
+
+import Home from './conainers/home/Home';
+import MenuComponent from './components/menu/Menu';
+
+import 'antd/dist/antd.css'
 import './App.css';
 
+import { Menu } from 'antd';
+import Products from './conainers/products/Products';
+
+const {Sider} = Layout
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [collapsed, setCollapsed] = useState(false)
+    return (
+         <Layout
+      style={{
+        minHeight: '100vh',
+      }}
+    >
+   <Sider 
+   collapsible 
+   collapsed={collapsed} 
+   onCollapse={(value) => setCollapsed(value)}>
+      <MenuComponent />
+      </Sider>
+    <Routes>
+      <Route path='/' element={<Home />}/>
+      <Route path='/products' element={<Products />}/>
+    </Routes>
+    </Layout>
+    
   );
 }
 
